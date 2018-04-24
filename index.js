@@ -93,6 +93,7 @@ module.exports = function () {
     if (!system.global.hasOwnProperty('auto_generate_environment')) { system.global.auto_generate_environment = true }
     if (!system.global.hasOwnProperty('environment')) { system.global.environment = [] }
     if (!system.global.hasOwnProperty('delay_start')) { system.global.delay_start = 0 }
+    if (!system.global.hasOwnProperty('sigkill_after')) { system.global.sigkill_after = 10000 }
     if (!system.global.hasOwnProperty('restart_on_error')) { system.global.restart_on_error = false }
     if (!system.global.hasOwnProperty('max_restarts')) { system.global.max_restarts = 5 }
   }
@@ -177,6 +178,11 @@ module.exports = function () {
         // set delay start for this container to global default if not set
         if (!system.topology.containers[key].hasOwnProperty('delay_start')) {
           system.topology.containers[key].delay_start = system.global.delay_start
+        }
+
+        // set sigkill after for this container to global default if not set
+        if (!system.topology.containers[key].hasOwnProperty('sigkill_after')) {
+          system.topology.containers[key].sigkill_after = system.global.sigkill_after
         }
 
         // set restart behaviour for this container to global default if not set
